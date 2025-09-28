@@ -13,48 +13,57 @@
 #91-100	        100
 #Considera que la inscripción tiene un valor de $12,000 y que el cobro es por semestre, además si el alumno esta en el equipo deportivo escolar
 #se ofrece un descuento del 7.5% adicional al descuento sobre su promedio.
+nombre_del_alumno=input("Ingrese su nombre: ")
 tipo_de_carrera=int(input("Seleccione el tipo de carrera que estudia: \n"
 "1. Ingeniería\n" 
 "2. Administración\n"
 "3. Medicina\n"))
 match tipo_de_carrera:
-    case 1: mensualidad=4500*6
-    case 2: mensualidad=2700*6
-    case 3: mensualidad=6100*6
-    case _: 
-        print("ERROR! el tipo de carrera no es disponible")
-        exit()
-promedio_escolar=int(input("Ingrese su promedio escolar: "))
-deporte=int(input("Esta inscrito en algún equipo deportivo escolar? \n"
-"1. Si\n"
+    case 1: 
+        subtotal = 4500 * 6
+        carrera="Ingeniería"
+    case 2: 
+        subtotal = 2700 * 6
+        carrera="Administración"
+    case 3: 
+        subtotal = 6100 * 6
+        carrera="Medicina"
+    case _:
+        print("ERROR! el tipo de carrera no esta disponible")
+promedio_escolar = int(input("Ingrese su promedio escolar: "))
+deporte = int(input("¿Está inscrito en algún equipo deportivo escolar? \n"
+"1. Sí\n"
 "2. No\n"))
-inscripcion=12000
-if promedio_escolar >=0 and promedio_escolar<=50:
-    descuento_aplicado=0
-elif promedio_escolar>=51 and promedio_escolar<=60:
-    descuento_aplicado=mensualidad*0.05
-elif promedio_escolar>=61 and promedio_escolar<=70:
-    descuento_aplicado=mensualidad*0.1
-elif promedio_escolar>=71 and promedio_escolar<=80:
-    descuento_aplicado=mensualidad*0.5
-elif promedio_escolar>=81 and promedio_escolar<=90:
-    descuento_aplicado=mensualidad*0.75
-elif promedio_escolar>=91 and promedio_escolar<=100:
-    descuento_aplicado=mensualidad*1
+inscripcion = 12000
+
+if 0 <= promedio_escolar <= 50:
+    descuento_promedio = 0
+elif 51 <= promedio_escolar <= 60:
+    descuento_promedio = subtotal * 0.05
+elif 61 <= promedio_escolar <= 70:
+    descuento_promedio = subtotal * 0.1
+elif 71 <= promedio_escolar <= 80:
+    descuento_promedio = subtotal * 0.5
+elif 81 <= promedio_escolar <= 90:
+    descuento_promedio = subtotal * 0.75
+elif 91 <= promedio_escolar <= 100:
+    descuento_promedio= subtotal * 1
 else: 
-    print("ERROR! el promedio ingresado es incorrecto")
-    exit()
-descuento_deportivo=0
-if deporte==1:
-    descuento_deportivo=(mensualidad-descuento_aplicado)*0.075
-elif deporte==2:
-    descuento_deportivo=0
+    print("ERROR! el promedio ingresado no es válido")
+if deporte == 1:
+    descuento_deportivo = descuento_promedio* 0.075
+    deporte_txt="Inscrito"
+elif deporte == 2:
+    descuento_deportivo = 0
+    deporte_txt="No inscrito"
 else: 
     print("ERROR! opción de deporte inválida")
-    exit()
-total=inscripcion+mensualidad-descuento_aplicado-descuento_deportivo
-print(f"El el costo de colegiatura por semestre es de {mensualidad:.2f}")
-print(f"El descuento por promedio es de {descuento_aplicado:.2f}")
-print(f"El descuento de deporte es de {descuento_deportivo:.2f}")
-print(f"El costo de inscripción es de {inscripcion:.2f}")
-print(f"El total a pagar es de {total:.2f}")
+total = inscripcion + subtotal - descuento_promedio - descuento_deportivo
+print(f"Nombre: {nombre_del_alumno}")
+print(f"Carrera: {carrera}")
+print(f"Deporte: {deporte_txt}")
+print(f"El costo de colegiatura por semestre es de ${subtotal:.2f}")
+print(f"El descuento por promedio es de ${descuento_promedio:.2f}")
+print(f"El descuento de deporte es de ${descuento_deportivo:.2f}")
+print(f"El costo de inscripción es de ${inscripcion:.2f}")
+print(f"El total a pagar es de ${total:.2f}")
